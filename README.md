@@ -59,6 +59,52 @@ Finally, verify the new endpoint is working by trying it out by going to the `/d
 
 🚀 Congratulations, through the exercise, you haven't only used copilot to generate code but also done it in an interactive and fun way! You can use GitHub Copilot to not only generate code, but write documentation, test your applications and more.
 
+## Cómo ejecutar el proyecto
+
+### Ejecutar en local (sin contenedor)
+- Requisitos: `Python 3.10`, `pip`.
+- Pasos:
+    - Crear entorno virtual:
+        ```bash
+        python -m venv .venv
+        source .venv/bin/activate
+        ```
+    - Instalar dependencias:
+        ```bash
+        pip install -r requirements.txt
+        ```
+    - Iniciar servidor:
+        ```bash
+        uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+        ```
+    - Abrir documentación:
+        - `http://localhost:8000/` redirige a `/docs`
+        - `http://localhost:8000/docs`
+
+### Ejecutar en Dev Container / Codespaces
+- Este repo incluye configuración de Dev Container (`devcontainer.json` y `Dockerfile`).
+- Al abrir en Codespaces o con la extensión Dev Containers, instala dependencias y puedes arrancar Uvicorn.
+- Documentación de la API:
+    - `http://localhost:8000/docs`
+    - Esquema OpenAPI accesible en `/.well-known/openapi.json` (generado por `main.py`).
+
+### Endpoints principales
+- `GET /countries`: lista de países (fuente `weather.json`).
+- `GET /countries/{country}`: ciudades del país.
+- `GET /countries/{country}/{city}/{month}`: promedio mensual `{high, low}`.
+
+### Ejecutar pruebas
+- Framework: `pytest`.
+- Archivo de pruebas: `test_main.py`.
+- Comando:
+    ```bash
+    pytest -q
+    ```
+
+### Problemas frecuentes
+- Error al correr `uvicorn`: asegúrate de haber instalado dependencias con `pip install -r requirements.txt` dentro del entorno virtual.
+- No encuentra `pytest`: instala con `pip install pytest` o usa el entorno virtual `.venv`.
+
 
 
 # Legal Notices
